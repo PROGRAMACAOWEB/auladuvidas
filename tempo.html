@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      img {width:100px};
+    </style>
+    <script src="js/jquery-2.2.2.js"></script>
+    <script type="text/javascript">
+
+      url = "http://localhost/PW/duvidas/tempo.json";
+
+
+      //a = {estado:"limpo",tmax:35, tmin:15, tatual:15, icone: "https://cdn4.iconfinder.com/data/icons/wthr-color/32/sunny-512.png"}
+
+
+function faztempo(tempo) {
+
+      div = $("<div/>");
+
+      table = $("<table/>");
+
+      tr1 = $("<tr/>");
+
+      td1_1 = $("<td/>");
+      img = $("<img/>").attr("src",tempo.icone);
+
+      td1_2 = $("<td/>").html(tempo.estado);
+
+      tr2 = $("<tr/>");
+      td2_1 = $("<td/>").attr("colspan","2").html("tmax:"+tempo.tmax+"<br/>"+"tmin:"+tempo.tmin);
+
+      td1_1.append(img);
+      tr1.append(td1_1).append(td1_2);
+      tr2.append(td2_1);
+      table.append(tr1).append(tr2);
+      div.append(table);
+
+      return div;
+}
+
+    $(document).ready(function () {
+
+      $.ajax(url, {
+        method : "GET",
+        type : "json",
+        data : {
+          "local" : "Viana do Castelo",
+          "key" : "kajsdhkfaksasfyv763ugjwehgf"
+        },
+        success : function (data) {
+          tempo = faztempo(data);
+          $("body").append(tempo);
+        }
+      });
+    })
+
+    </script>
+  </head>
+  <body>
+
+
+  </body>
+</html>
